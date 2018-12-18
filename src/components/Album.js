@@ -44,8 +44,8 @@ class Album extends Component {
         }
       }
 
-      hoverOn() {
-        this.setState({ hover: true })
+      hoverOn(index) {
+        this.setState({ hover: index })
       }
 
       hoverOff() {
@@ -61,14 +61,15 @@ handleHover(song, index) {
   // if song is playing INDEX == 'PAUSE'
   //if song is paused, PAUSE becomes PLAY
 
+
   if (this.state.isPlaying && isSameSong) {
     return pause;
   }
-  else if (this.state.hover === true) {
-    return play
-  }
   else if (!this.state.isPlaying && isSameSong) {
     return play
+  }
+  else if (this.state.hover === index) {
+      return play
   }
   else {
         return ( <td> {index+1} </td>)
