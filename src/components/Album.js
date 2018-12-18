@@ -53,14 +53,12 @@ class Album extends Component {
       }
 
 handleHover(song, index) {
-
   var pause = <td><ion-icon name="pause"></ion-icon></td>
   var play = <td><ion-icon name="play"></ion-icon></td>
   var isSameSong = this.state.currentSong === song
   // on Hover, INDEX changes to 'PLAY'
   // if song is playing INDEX == 'PAUSE'
   //if song is paused, PAUSE becomes PLAY
-
 
   if (this.state.isPlaying && isSameSong) {
     return pause;
@@ -96,7 +94,7 @@ handleHover(song, index) {
           <tbody>
           {
             this.state.album.songs.map((song,index) =>
-            <tr onMouseEnter={() => this.hoverOn()}
+            <tr onMouseEnter={() => this.hoverOn(index)}
                 onMouseLeave={() => this.hoverOff()}
                 className="song" key={index} onClick={() => this.handleSongClick(song)} >
                   <td>{this.handleHover(song,index)}</td>
