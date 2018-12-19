@@ -5,13 +5,16 @@ import PlayerBar from './PlayerBar';
 class Album extends Component {
     constructor(props) {
       super(props);
+
       const album = albumData.find( album => {
-        return album.slug === this.props.match.params.slug
+      return album.slug === this.props.match.params.slug
       });
 
       this.state = {
         album: album,
         currentSong: album.songs[0],
+        currentTime: 0,
+        duration: album.songs[0].duration,
         isPlaying: false,
         hover: false
       };
@@ -67,6 +70,32 @@ class Album extends Component {
 
       hoverOff() {
         this.setState({ hover: false })
+      }
+
+      componentDidMount() {
+        this.EventListeners ={
+          timeupdate: (e) => {
+          this.setState({ currentTime: this.audioElement.currentTime });
+        },
+          durationchange: (e) => {
+          this.setState ({ duration:this.audioElement.duration });
+          }
+        };
+
+        this.audioElement.addEventListener('timeupdate', this.EventListeners.timeupdate);
+        this.audioElement.addEventListener('duration', this.EventListeners.durationchange);
+      }
+
+      componentWillUnmount() {
+        this.audioElement.src = null;
+        this.audioElement.removeEventListener('timeupdate', this.EventListeners.timeupdate);
+        this.audioElement.removeEventListener('durationchange', this.EventListeners.durationchange)
+      }
+
+      handleTimeChange(e) {
+      const newTime = this.audioElement.duration * e.target.value;
+      this.audioElement.currentTime = newTime;
+      this.setState({ currentTime: newTime });
       }
 
 handleHover(song, index) {
@@ -125,9 +154,12 @@ handleHover(song, index) {
           <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
+          currentTime={this.audioElement.currentTime}
+          duration={this.audioElement.duration}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick()}
+          handleTimeChange={(e) => this.handleTimeChange(e)}
           />
       </section>
     );
