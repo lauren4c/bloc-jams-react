@@ -16,12 +16,13 @@ class Album extends Component {
         currentTime: 0,
         duration: album.songs[0].duration,
         isPlaying: false,
-        hover: false
+        hover: false,
+        volume: .8
       };
 
       this.audioElement = document.createElement('audio');
       this.audioElement.src = album.songs[0].audioSrc;
-    }
+}
 
       play() {
         this.audioElement.play();
@@ -79,17 +80,22 @@ class Album extends Component {
         },
           durationchange: (e) => {
           this.setState ({ duration:this.audioElement.duration });
-          }
+        },
+          volumechange: (e) => {
+          this.setState ({ volume:this.audioElement.volume });
+        }
         };
 
         this.audioElement.addEventListener('timeupdate', this.EventListeners.timeupdate);
         this.audioElement.addEventListener('duration', this.EventListeners.durationchange);
+        this.audioElement.addEventListener('volume', this.EventListeners.volumechange);
       }
 
       componentWillUnmount() {
         this.audioElement.src = null;
         this.audioElement.removeEventListener('timeupdate', this.EventListeners.timeupdate);
         this.audioElement.removeEventListener('durationchange', this.EventListeners.durationchange)
+        this.audioElement.removeEventListener('volumechange', this.EventListeners.volumechange)
       }
 
       handleTimeChange(e) {
@@ -98,13 +104,29 @@ class Album extends Component {
       this.setState({ currentTime: newTime });
       }
 
+      handleVolumeChange(e) {
+        this.audioElement.volume = e.target.value;
+        this.setState({ volume: e.target.value });
+
+      }
+
+      formatTime(seconds) {
+        var playbackMinutes = Number.parseInt(seconds / 60)
+        var playbackSeconds = Number.parseInt(seconds % 60)
+        var formattedTime = (playbackMinutes + ":" + ("0" + playbackSeconds).slice(-2))
+
+       if (isNaN(seconds) === true) {
+          return "-:--"
+        }
+        else  {
+          return formattedTime
+              }
+}
+
 handleHover(song, index) {
-  var pause = <td><ion-icon name="pause"></ion-icon></td>
-  var play = <td><ion-icon name="play"></ion-icon></td>
+  var pause = <ion-icon name="pause"></ion-icon>
+  var play = <ion-icon name="play"></ion-icon>
   var isSameSong = this.state.currentSong === song
-  // on Hover, INDEX changes to 'PLAY'
-  // if song is playing INDEX == 'PAUSE'
-  //if song is paused, PAUSE becomes PLAY
 
   if (this.state.isPlaying && isSameSong) {
     return pause;
@@ -116,7 +138,7 @@ handleHover(song, index) {
       return play
   }
   else {
-        return ( <td> {index+1} </td>)
+        return (index+1)
       }
   }
 
@@ -145,7 +167,7 @@ handleHover(song, index) {
                 className="song" key={index} onClick={() => this.handleSongClick(song)} >
                   <td>{this.handleHover(song,index)}</td>
                   <td>{song.title}</td>
-                  <td>{song.duration}</td>
+                  <td>{this.formatTime(song.duration)}</td>
                   </tr>
                 )
               }
@@ -156,10 +178,13 @@ handleHover(song, index) {
           currentSong={this.state.currentSong}
           currentTime={this.audioElement.currentTime}
           duration={this.audioElement.duration}
+          volume={this.audioElement.volume}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
+          handleVolumeChange={(e) => this.handleVolumeChange(e)}
+          formatTime={(seconds) => this.formatTime(seconds)}
           />
       </section>
     );
