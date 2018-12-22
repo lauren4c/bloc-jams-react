@@ -156,9 +156,11 @@ class Album extends Component {
 
     if (this.state.isPlaying && isSameSong) {
       return pause;
-    } else if (!this.state.isPlaying && isSameSong) {
-      return play;
-    } else if (this.state.hover === index) {
+    } 
+    //else if (!this.state.isPlaying && isSameSong) {
+     // return play;
+   // }
+    else if (this.state.hover === index) {
       return play;
     } else {
       return index + 1;
