@@ -5,22 +5,22 @@ class PlayerBar extends Component {
     return (
       <section className="player-bar">
         <section id="buttons">
-          <button id="previous" onClick={this.props.handlePrevClick}>
+          <span id="previous" onClick={this.props.handlePrevClick}>
             <ion-icon name="skip-backward" />
-          </button>
-          <button id="play-pause" onClick={this.props.handleSongClick}>
+          </span>
+          <span id="play-pause" onClick={this.props.handleSongClick}>
             <span>
               {this.props.isPlaying ? ( <ion-icon name="pause" /> ) : ( <ion-icon name="play" /> )}
             </span>
-          </button>
-          <button id="next" onClick={this.props.handleNextClick}>
+          </span>
+          <span id="next" onClick={this.props.handleNextClick}>
             <ion-icon name="skip-forward" />
-          </button>
+          </span>
         </section>
 
         <section id="time-control">
-          <div className="current-time">
-            {this.props.formatTime(this.props.currentTime)}
+          <div className="time">
+            {this.props.formatTime(this.props.currentTime)} | {this.props.formatTime(this.props.duration)}
           </div>
           <input
             type="range"
@@ -31,13 +31,10 @@ class PlayerBar extends Component {
             step="0.01"
             onChange={this.props.handleTimeChange}
           />
-          <div className="total-time">
-            Song Length: {this.props.formatTime(this.props.duration)}
-          </div>
         </section>
 
         <section id="volume-control">
-          <div className="icon ion-volume-low">Volume Controls:</div>
+          <ion-icon name="volume-high"></ion-icon>
           <input
             type="range"
             className="volume-control"

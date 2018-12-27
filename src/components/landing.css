@@ -1,0 +1,42 @@
+
+.landing {
+  background-image: url("/assets/images/concert.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hr-title {
+  font-size: 4em;
+}
+.main-content {
+  display: flex;
+  flex-flow: row wrap;
+  width: 80%;
+  opacity: 0.7;
+  border-radius: 20px;
+  justify-content: center;
+  background-color: #ffffff;
+  align: center;
+}
+.selling-points {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.point {
+  flex-grow: 1;
+  flex-basis: 30%;
+  padding: 20px;
+}
+@media all and (max-width: 600px) {
+  .selling-points {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+    padding: 10px;
+  }
+}
