@@ -8,7 +8,7 @@
 
 .player-bar {
   width: 100%;
-  opacity: 0.7;
+  opacity: 0.55;
   justify-content: center;
   background-color: #000000;
   color: white;
@@ -42,10 +42,6 @@ td {
   margin: 20px;
 }
 
-.album-details {
-  align: center;
-}
-
 #volume-control {
   padding-bottom: 2em;
 }
@@ -53,12 +49,11 @@ td {
 #album-cover-art {
   height: 20rem;
   width: auto;
- margin: 2em;
+  margin: 2em;
 }
 
 @media all and (max-width: 480px) {
   .album img {
     height: 14rem;
   }
-
 }
