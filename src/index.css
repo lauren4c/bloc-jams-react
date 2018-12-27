@@ -19,10 +19,10 @@ h1 {
 }
 
 h2 {
-  font-size: 1em;
+  font-size: 1.25em;
+  line-height: 1.25em;
   margin: 10px;
   font-family: "Roboto", sans-serif;
-  line-height: 10px;
 }
 
 a {
@@ -31,9 +31,9 @@ a {
 }
 
 p {
-  font-size: 0.8em;
+  font-size: 1em;
   font-family: "Roboto", sans-serif;
-  line-height: 10px;
+  line-height: 1.25em;
 }
 
 nav {
