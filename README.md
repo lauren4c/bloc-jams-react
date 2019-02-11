@@ -1,4 +1,4 @@
-This project was built using HTML, CSS, JSX, Javascript, Firebase, NPM and, of course, React. I created a custom CSS design using flexbox, so it's responsive and looks beautiful on any device. View it live via Netlify: https://4cblocjams.netlify.com/  
+This project was built using HTML, CSS, JSX, Javascript, NPM, and React. I created a custom CSS design using flexbox, so it's responsive and looks beautiful on any device. View it live via Netlify: https://4cblocjams.netlify.com/  
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
